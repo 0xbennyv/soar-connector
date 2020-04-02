@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+
+  xg-soar-redis:
+    container_name: xg-soar-redis
+    image: redis:latest
+    ports:
+      - "6379:6379"
+
+  xg-soar-db:
+    container_name: xg-soar-db
+    image: postgres:latest
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=xg-soar
+      - POSTGRES_PASSWORD=xg-soar
+      - POSTGRES_DB=xg-soar-engine
+
+  xg-soar-engine:
+    container_name: xg-soar-engine
+    build: xg-soar-engine/.
+    ports:
+      - "80:80"
+    environment:
+      - REDIS_URL=redis://xg-soar-redis
+      - DATABASE_URL=postgres://xg-soar:xg-soar@xg-soar-db:5432/xg-soar-engine
+    depends_on: 
+      - xg-soar-db
+      - xg-soar-redis
+    command: /conf/start.sh
+
+  xg-soar-workers:
+    container_name: xg-soar-workers
+    build: xg-soar-engine/.
+    environment:
+      - REDIS_URL=redis://xg-soar-redis
+      - DATABASE_URL=postgres://xg-soar:xg-soar@xg-soar-db:5432/xg-soar-engine
+    depends_on: 
+      - xg-soar-redis
+      - xg-soar-db
+    command: rq worker --url redis://xg-soar-redis xg-soar-ondemand xg-soar-ip xg-soar-ip-del xg-soar-fqdn xg-soar-fqdn-del xg-soar-fw xg-soar-fw-del --with-scheduler
+
+volumes:
+  postgres_data:
+

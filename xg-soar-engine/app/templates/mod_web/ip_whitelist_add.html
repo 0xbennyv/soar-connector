@@ -1,0 +1,11 @@
+{% extends "mod_web/template.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+<form method="POST" action="{{url_for('web.ip_whitelist_add')}}">
+  <h1 class="h3 mb-3 font-weight-normal">Add IP to White List</h1>
+  {{ form.hidden_tag() }}
+  {{ wtf.form_field(form.ip_address) }}
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+</form>     
+{% endblock %}

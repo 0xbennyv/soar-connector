@@ -1,0 +1,594 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "description": "SOAR Connector basic API",
+    "title": "SOAR Connector"
+  },
+  "basePath": "/api",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/firewall/add": {
+      "post": {
+        "description": "Add a Firewall to the SOAR Connector",
+        "summary": "Add Firewall",
+        "tags": [
+          "Firewall Management"
+        ],
+        "operationId": "AddFirewall",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AddFirewallRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/firewall/list/{id}": {
+      "get": {
+        "summary": "List Firewall",
+        "tags": [
+          "Firewall Management"
+        ],
+        "operationId": "ListFirewall",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Firewall ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/api/firewall/list/all": {
+      "get": {
+        "summary": "List All Firewalls",
+        "tags": [
+          "Firewall Management"
+        ],
+        "operationId": "ListAllFirewalls",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/firewall/delete/{id}": {
+      "get": {
+        "summary": "Delete Firewall",
+        "tags": [
+          "Firewall Management"
+        ],
+        "operationId": "DeleteFirewall",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID of Firewall"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/blacklistip/list/{id}": {
+      "get": {
+        "summary": "Blacklist Check IP",
+        "tags": [
+          "Blacklist IP Address"
+        ],
+        "operationId": "BlacklistCheckIP",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "IP Address to check on blacklist"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/api/blacklistip/list/all": {
+      "get": {
+        "summary": "Blacklist View All",
+        "tags": [
+          "Blacklist IP Address"
+        ],
+        "operationId": "BlacklistViewAll",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/api/blacklistip/delete/{ip}": {
+      "get": {
+        "summary": "Blacklist Delete IP",
+        "tags": [
+          "Blacklist IP Address"
+        ],
+        "operationId": "BlacklistDeleteIP",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "ip",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/blacklistip/add/{ip}": {
+      "get": {
+        "summary": "Blacklist Add IP",
+        "tags": [
+          "Blacklist IP Address"
+        ],
+        "operationId": "BlacklistAddIP",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "ip",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/blacklistfqdn/list/{fqdn}": {
+      "get": {
+        "summary": "Blacklist Check FQDN",
+        "tags": [
+          "Blacklist FQDN"
+        ],
+        "operationId": "BlacklistCheckFQDN",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "fqdn",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/api/blacklistfqdn/list/all": {
+      "get": {
+        "summary": "Blacklist View All",
+        "tags": [
+          "Blacklist FQDN"
+        ],
+        "operationId": "GetBlacklistViewAll",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/blacklistfqdn/delete/{fqdn}": {
+      "get": {
+        "summary": "Blacklist Delete IP",
+        "tags": [
+          "Blacklist FQDN"
+        ],
+        "operationId": "GetBlacklistDeleteIP",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "fqdn",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/blacklistfqdn/add/{fqdn}": {
+      "get": {
+        "summary": "Blacklist Add FQDN",
+        "tags": [
+          "Blacklist FQDN"
+        ],
+        "operationId": "BlacklistAddFQDN",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "fqdn",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/run/distribute/ips": {
+      "get": {
+        "summary": "Distribute IP Blacklist",
+        "tags": [
+          "Tasks"
+        ],
+        "operationId": "DistributeIPBlacklist",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/run/distribute/fqdns": {
+      "get": {
+        "summary": "Distribute FQDN Blacklist",
+        "tags": [
+          "Tasks"
+        ],
+        "operationId": "DistributeFQDNBlacklist",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/api": {
+      "get": {
+        "summary": "Base Query",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "BaseQuery",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/stats": {
+      "get": {
+        "summary": "Statistics",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "Statistics",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AddFirewallRequest": {
+      "title": "AddFirewallRequest",
+      "example": {
+        "fwname": "Firewall Name",
+        "username": "apiuser",
+        "password": "apipass",
+        "ip": "192.0.2.1",
+        "port": "4444",
+        "init": "0"
+      },
+      "type": "object",
+      "properties": {
+        "fwname": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "ip": {
+          "type": "string"
+        },
+        "port": {
+          "type": "string"
+        },
+        "init": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "fwname",
+        "username",
+        "password",
+        "ip",
+        "port",
+        "init"
+      ]
+    }
+  },
+  "tags": [
+    {
+      "name": "Firewall Management"
+    },
+    {
+      "name": "Blacklist IP Address"
+    },
+    {
+      "name": "Blacklist FQDN"
+    },
+    {
+      "name": "Tasks"
+    },
+    {
+      "name": "Misc",
+      "description": ""
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{% extends "mod_web/template.html" %}
+{% block content %}
+<div class="row">
+  <h1>Firewalls</h1>
+</div>
+<div style="margin-bottom: 10px;" class="row">
+    <div class="col-xs-6 text-left">
+      <a type="button" class="btn btn-primary mr-2" href="{{ url_for('web.firewall_add') }}">Add Firewall</a>
+    </div>
+    <div class="col-xs-6 text-left">
+      <a type="button" class="btn btn-info mr-2" href="{{ url_for('web.firewall_init_all') }}">Initialize All</a>
+    </div>
+    <div class="col-xs-6 text-left">
+      <input class="form-control" id="search" type="text" placeholder="Search..">
+    </div>
+</div>
+<table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Username</th>
+        <th scope="col">IP</th>
+        <th scope="col">Port</th>
+        <th scope="col">Initialized</th>
+        <th scope="col">Health</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+      <tbody id="firewalls">
+      {% for f in firewalls %}
+        <tr>
+          <td><a href="{{ url_for('web.firewall_edit', id=f.id) }}">{{f.fwname}}</a></td>
+          <td>{{f.username}}</td>
+          <td>{{f.ip}}</td>
+          <td>{{f.port}}</td>
+          <td>{% if f.initialized == 1 %}<p class="text-success">Initialized</p>{% endif %}{% if f.initialized == 0 %}<p class="text-danger">Not Initialized</p>{% endif %}</td>
+          <td>{% if f.deletion == 1 %}<p class="text-danger">Marked for Deletion</p>{% else %}{% if f.health == 0 %}<p class="text-danger">Needs Attention</p>{% endif %}{% if f.health == 1 %}<p class="text-success">Healthy</p>{% endif %}{% if f.health == 2 %}<p class="text-danger">Not Initialized</p>{% endif %}{% endif %}</td>
+          <td>
+            <div class="btn-group">
+            <a role="button" class="btn btn-success" data-toggle="tooltip" title="Edit the Firewalls Settings"  href="{{ url_for('web.firewall_edit', id=f.id) }}">Edit</a>
+            <a role="button" class="btn btn-success" data-toggle="tooltip" title="Re-deploy configuration"  href="{{ url_for('web.firewall_reinit', id=f.id) }}">{% if f.initialized == 1 %}Re-Initialize{% endif %}{% if f.initialized == 0 %}Initialize{% endif %}</a>
+            <a role="button" class="btn btn-primary" data-toggle="tooltip" title="Check the device authentication and connectivity" href="{{ url_for('web.firewall_auth_check', id=f.id) }}">Check Health</a>
+            <a role="button" class="btn btn-danger" data-toggle="tooltip" title="Remove all configuration then remove from database"  href="{{ url_for('web.firewall_decomission', id=f.id) }}">Decomission</a>
+            <a role="button" class="btn btn-danger" data-toggle="tooltip" title="You'll never see this device again and all configuration will remain on it."  href="{{ url_for('web.firewall_delete', id=f.id) }}">Delete</a>
+            </div>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <script>
+    $(document).ready(function(){
+      $("#search").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#firewalls tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+  </script>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends "mod_web/template.html" %}
+
+{% block content %}
+<div class="card-deck">
+    <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title" style="text-align: center;">Firewalls Online</h5>
+            <p class="card-text"><h1 style="text-align: center;">{% print online %}</h1></p>
+        </div>
+    </div>
+    <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title" style="text-align: center;">Not Initialized</h5>
+            <p class="card-text"><h1 style="text-align: center;">{% print notinit %}</h1></p>
+        </div>
+    </div>
+    <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title" style="text-align: center;">Need Review</h5>
+            <p class="card-text"><h1 style="text-align: center;">{% print health %}</h1></p>
+        </div>
+    </div>
+    <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+      <div class="card-body">
+          <h5 class="card-title" style="text-align: center;">FQDN/Domains Blocked</h5>
+          <p class="card-text"><h1 style="text-align: center;">{% print fqdns %}</h1></p>
+      </div>
+    </div>
+    <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+      <div class="card-body">
+          <h5 class="card-title" style="text-align: center;">IP Addresses Blocked</h5>
+          <p class="card-text"><h1 style="text-align: center;">{% print ips %}</h1></p>
+      </div>
+    </div>
+</div>
+<div class="table-responsive-sm">
+<h3>Task History</h3>
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Job Status</th>
+        <th scope="col">ID</th>
+        <th scope="col">Date/Time (UTC)</th>
+      </tr>
+    </thead>
+      <tbody id="tasks">
+      {% for t in tasks %}
+        <tr>
+            <td>{{t.name}}</td>
+            <td>{% if t.complete == 2 %}<p class="text-primary">Started</p>{% endif %}{% if t.complete == 1 %}<p class="text-success">Completed</p>{% endif %}{% if t.complete == 0 %}<p class="text-danger">Not Started</p>{% endif %}</td>
+            <td>{{t.id}}</td>
+            <td>{{t.date}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

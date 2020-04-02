@@ -1,0 +1,15 @@
+{% extends "mod_web/template.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+<div class="form-content">
+	<form method="POST" action="{{url_for('web.token_add')}}">
+    		<h1 class="h3 mb-3 font-weight-normal">Create Token</h1>
+    		{{ form.hidden_tag() }}
+    		{{ wtf.form_field(form.token_name) }}
+    		{{ wtf.form_field(form.token_description) }}
+    		{{ wtf.form_field(form.token_expiration) }}
+    		<button class="btn btn-primary" type="submit">Add Token</button>
+	</form>
+</div>    
+{% endblock %}

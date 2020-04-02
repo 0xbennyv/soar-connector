@@ -1,0 +1,19 @@
+{% extends "mod_web/template.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+<div class="form-content">
+	<form method="POST" action="{{url_for('web.firewall_add')}}">
+		<h1 class="h3 mb-3 font-weight-normal">Add Firewall</h1>
+    		{{ form.hidden_tag() }}
+    		{{ wtf.form_field(form.fw_name) }}
+    		{{ wtf.form_field(form.username) }}
+			{{ wtf.form_field(form.password) }}
+			{{ wtf.form_field(form.password2) }}
+    		{{ wtf.form_field(form.ip_address) }}
+    		{{ wtf.form_field(form.port) }}
+    		{{ wtf.form_field(form.initialize) }}
+    		<button class="btn btn-primary" type="submit">Add Firewall</button>
+	</form>
+</div>
+{% endblock %}

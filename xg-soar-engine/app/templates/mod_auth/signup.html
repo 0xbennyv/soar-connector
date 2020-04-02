@@ -1,0 +1,54 @@
+{% import "bootstrap/wtf.html" as wtf %}
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>{% block title %}{{ title }}{% endblock %}</title>
+        {% block headers %}{% endblock %}
+        <!-- Bootstrap CSS CDN -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='mod_auth/css/style.css') }}">
+    </head>
+
+    <body class="text-center">
+        <form class="form-signup border border-info rounded p-5" action="{{ url_for('auth.signup') }}" method="post" name="signup">
+            <h1 class="h3 mb-3 font-weight-normal">Initial Setup User</h1>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            <!-- Categories: success (green), info (blue), warning (yellow), danger (red) -->
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div style="text-align: center;" class="alert alert-{{category}}" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}  
+            {{ form.hidden_tag() }}
+            <div class="form-row mb-4">
+                <div class="col"> 
+                    {{ wtf.form_field(form.firstname) }}
+                </div>
+                <div class="col">
+                    {{ wtf.form_field(form.lastname) }}
+                </div>
+            </div>
+            <div class="form-row mb-4">
+                <div class="col">
+                    {{ wtf.form_field(form.email) }}
+                </div>
+            </div>
+            <div class="form-row mb-4">
+                <div class="col">
+                    {{ wtf.form_field(form.password) }}
+                </div>
+                <div class="col">
+                    {{ wtf.form_field(form.password2) }}
+                </div>
+            </div>
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </form>
+    </body>
+</html>
