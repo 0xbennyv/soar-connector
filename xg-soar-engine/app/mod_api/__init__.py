@@ -2,7 +2,7 @@
 from flask import Blueprint, jsonify
 from app import db
 # Import module db models
-from app.models import Firewalls, Tasks, BlackListFqdn, BlackListIp
+from app.models import Firewalls, Tasks, BlackListFqdn, BlackListIp, User
 
 # Set the blueprint
 mod_api = Blueprint('api', __name__, url_prefix='/api')
