@@ -25,4 +25,4 @@ wrapt
 WTForms
 xmltodict
 psycopg2-binary
-
+email_validator
